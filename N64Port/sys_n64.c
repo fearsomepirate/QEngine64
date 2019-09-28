@@ -34,6 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "sys.h"
+#include "sys_gfx.h"
 //#include "dosisms.h"
 
 extern void TrapKey(void);
@@ -150,15 +151,17 @@ double Sys_FloatTime(void)
 
 void Host_Frame(float time) //just a placeholder
 {
-
+   SysGfx_InitFrame();
+   SysGfx_FinishFrame();
 }
 
-void HostFrame64(int n)
+void HostFrame64(int numTasks)
 {
    double newtime = Sys_FloatTime();
    double time = newtime - oldtime;
 
-   Host_Frame(time);
+   if (numTasks < 2)
+      Host_Frame(time);
 
    //Sys_StackCheck ();
 
@@ -174,7 +177,9 @@ void Sys_Init(void)
    nuGfxFuncSet((NUGfxFunc)HostFrame64);
    nuGfxDisplayOn();
 
-
+   //SysGfx_RCPInit();
+   //SysGfx_ClearCfb();
+         
 #if 0 //Anything relevant here?
 	MaskExceptions ();
 
@@ -460,7 +465,7 @@ main
 */
 void mainproc(void)
 {   
-   Sys_GetMemory();
+   //Sys_GetMemory();
 
 
 #if 0 //Setup waves
@@ -471,6 +476,7 @@ void mainproc(void)
 
    Sys_Init();
 
+   
    //Con_Printf ("Top of stack: 0x%x\n", &time);
    while (1)
    { /* Loop forever */ }   

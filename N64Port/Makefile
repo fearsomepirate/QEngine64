@@ -19,15 +19,15 @@ LCINCS =	-I. -I$(NUSYSINCDIR) -I$(NUSTDINCDIR) -I$(ROOT)/usr/include/PR
 LCOPTS =	-G 0
 LDFLAGS = $(MKDEPOPT) -L$(LIB) -L$(NUSYSLIBDIR) -L$(NUSTDLIBDIR) -lnusys_d -lgultra_d -lnustd_d -L$(GCCDIR)/mipse/lib -lkmc
 
-OPTIMIZER =	-g
+OPTIMIZER =	-O2
 
-APP =		nu0.out
+APP =		qengine64.out
 
-TARGETS =	nu0.n64
+TARGETS =	qengine64.n64
 
-HFILES =	quakedef.h common.h cvar.h
+HFILES =	quakedef.h common.h cvar.h sys_gfx.h
 
-CODEFILES   = 	sys_n64.c
+CODEFILES   = 	sys_n64.c sys_gfx.c
 
 CODEOBJECTS =	$(CODEFILES:.c=.o)  $(NUSYSLIBDIR)/nusys.o
 

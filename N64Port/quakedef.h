@@ -85,7 +85,7 @@ void	VID_UnlockBuffer(void);
 #define	MINIMUM_MEMORY_LEVELPAK	(MINIMUM_MEMORY + 0x100000)
 
 //Start off with a 1 MB heap...we'll want to use the faster osMalloc later
-#define HEAP_SIZE (1024*1024)
+#define HEAP_SIZE (512*1024)
 
 #define MAX_NUM_ARGVS	50
 
