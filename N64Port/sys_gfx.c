@@ -14,6 +14,8 @@ static Vp vp = {
 };
 
 
+static char errBufs[8][32] = { "0", "1", "2", "3", "4", "5", "6", "7" };
+
 Gfx setup_rdpstate[] = {
    //gsDPSetRenderMode(G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2),
    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
@@ -119,10 +121,13 @@ void SysGfx_FinishFrame(void)
       //(void*)& us;
 
       {
-         char charbuf[32];
-         nuDebConTextPos(0, 12, 23);
-         sprintf(charbuf, "Hello, world");
-         nuDebConCPuts(0, charbuf);
+         int i;
+
+         for (i = 0; i < 4; ++i)
+         {
+            nuDebConTextPos(i, 1, 1 + i);
+            nuDebConCPuts(i, errBufs[i]);
+         }
       }
 
       nuDebConDisp(NU_SC_SWAPBUFFER);
